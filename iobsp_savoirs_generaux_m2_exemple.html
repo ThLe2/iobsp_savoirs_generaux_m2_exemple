@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exemple commenté — Un recrutement trop bien vendu</title>
+<style>
+:root{--prune:#8C1E70;--prune-fonce:#5E1349;--prune-clair:#F4E6EE;--accent:#C77BAA;
+ --vert:#283C28;--gris:#3C3C3C;--gris-moyen:#8A7A85;--filet:#E8DCE5;--creme:#FAF6F8;
+ --ok:#2F7A4F;--ko:#B23B3B;--amb:#B5852A;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--creme);color:var(--gris);
+ font-family:"Nunito","Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.62}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 60px}
+header.bandeau{background:var(--prune-fonce);color:#fff;padding:18px 0;border-bottom:4px solid var(--accent)}
+header.bandeau .wrap{padding-bottom:0}
+.chapitre{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#EAD3E3}
+.chapitre span{color:var(--accent);margin:0 6px}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:27px;line-height:1.25;margin:8px 0 4px;color:#fff}
+.sous{color:#EAD3E3;font-size:14.5px;margin:0}
+h2{font-family:Georgia,"Times New Roman",serif;font-size:20px;color:var(--prune-fonce);
+ margin:34px 0 0;padding-bottom:8px;border-bottom:2px solid var(--filet)}
+h2 .num{color:var(--accent);margin-right:8px}
+h3{font-size:15px;color:var(--vert);margin:20px 0 8px;letter-spacing:.02em}
+.carte{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:20px 22px;margin:18px 0;
+ box-shadow:0 1px 2px rgba(94,19,73,.05)}
+.enc{background:var(--prune-clair);border-left:5px solid var(--prune);padding:14px 18px;
+ border-radius:0 8px 8px 0;margin:18px 0;font-size:15.2px}
+.enc .t{display:block;font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+ font-weight:800;color:var(--prune-fonce);margin-bottom:6px}
+.enc.al{background:#FBF4F4;border-left-color:var(--ko)}.enc.al .t{color:var(--ko)}
+.enc.ci{background:#FCF8F0;border-left-color:var(--amb)}.enc.ci .t{color:#8A6418}
+.situ{background:#FCF9FB;border:1px dashed var(--filet);border-radius:8px;padding:16px 18px;margin:16px 0;font-size:15.2px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.duo>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:15px 17px;font-size:14.8px}
+.duo .h{font-weight:800;color:var(--prune-fonce);margin-bottom:7px;font-size:14.5px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.tri>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:14px 15px;font-size:14.3px}
+.quad{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.quad>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:12px 13px;font-size:13.6px}
+.quad .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13px;
+ text-transform:uppercase;letter-spacing:.04em}
+.tri .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13.5px;
+ text-transform:uppercase;letter-spacing:.05em}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.8px;background:#fff}
+th,td{border:1px solid var(--filet);padding:9px 12px;text-align:left}
+thead th{background:var(--prune-clair);color:var(--prune-fonce);font-size:13.5px}
+tbody th{font-weight:600;color:var(--gris)}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td,tr.tot th{background:#FBF3F8;font-weight:800;color:var(--prune-fonce)}
+.dl{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;text-decoration:none;
+ padding:11px 20px;border-radius:8px;font-weight:700;font-size:15px;margin:20px 0 4px}
+.dl:hover{background:var(--prune-fonce)}
+ol.q{padding-left:0;list-style:none;counter-reset:q}
+ol.q>li{margin:16px 0;padding-left:38px;position:relative}
+ol.q>li::before{counter-increment:q;content:counter(q);position:absolute;left:0;top:1px;
+ width:26px;height:26px;border-radius:50%;background:var(--prune-clair);color:var(--prune-fonce);
+ font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+b,strong{color:var(--vert)}
+footer{text-align:center;font-size:12.5px;color:var(--gris-moyen);padding:26px 18px 12px;
+ border-top:1px solid var(--filet);margin-top:44px}
+@media(max-width:860px){.quad{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.duo,.tri,.quad{grid-template-columns:1fr}h1{font-size:22px}}
+@media print{body{background:#fff}.dl{display:none}header.bandeau{background:#5E1349 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+.mail{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:0;margin:16px 0;overflow:hidden}
+.mail .ent{background:#F7F1F5;border-bottom:1px solid var(--filet);padding:10px 16px;font-size:14px}
+.mail .ent b{color:var(--prune-fonce)}
+.mail .txt{padding:14px 18px;font-size:15.2px}
+.mail p{margin:0 0 10px}
+.err{background:#FDECEC;border-bottom:2px solid var(--ko);padding:0 2px;border-radius:3px}
+.cor{display:none;background:#E9F6EE;border-bottom:2px solid var(--ok);padding:0 2px;border-radius:3px;color:var(--ok);font-weight:700}
+.nf{font-size:11px;vertical-align:super;font-weight:800;color:var(--ko)}
+body.vu .err{text-decoration:line-through;background:none;border:0;color:var(--gris-moyen)}
+body.vu .cor{display:inline}
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;border:0;
+ padding:12px 22px;border-radius:8px;font-family:inherit;font-weight:800;font-size:15px;cursor:pointer}
+.btn:hover{background:var(--prune-fonce)}
+.liste{display:none}body.vu .liste{display:block}
+</style></head>
+<body>
+<header class="bandeau"><div class="wrap">
+ <div class="chapitre">IOBSP · Savoirs généraux <span>/</span> Module 2</div><h1>Un recrutement trop bien vendu</h1><p class="sous">Exemple commenté — Les catégories réglementaires d'IOBSP</p>
+</div></header>
+<div class="wrap">
+
+<h2><span class="num">1 ·</span>La situation</h2>
+<div class="carte">
+<p>Sarah Benali est mandataire exclusive d'une banque pour le crédit immobilier. Un réseau de courtage, dont la tête de réseau est immatriculée comme courtier, cherche à la recruter. Elle rejoindrait le réseau comme agent commercial, mandatée par cette tête de réseau. Lisez le discours du recruteur, repérez les affirmations inexactes, puis affichez la correction.</p>
+<div class="mail">
+ <div class="ent"><b>Rendez-vous de recrutement</b> — propos du responsable du développement du réseau</div>
+ <div class="txt"><p>« Chez nous, vous gagnez en liberté : nos conventions couvrent plus de trente banques. »</p><p>« <span class="err">Avec trente banques, vous devenez courtière : c'est le nombre de partenaires qui fait le statut.</span> <span class="cor">Vous serez mandataire d'intermédiaire : c'est la tête de réseau, courtier, qui vous mandate.</span><span class="nf">1</span> »</p><p>« <span class="err">Et tous les clients que vous signerez seront à vous : c'est votre fonds de commerce.</span> <span class="cor">La clientèle restera celle du réseau : c'est le prix des conventions et des outils.</span><span class="nf">2</span> »</p><p>« <span class="err">Côté formation, rien à refaire : le niveau de votre mandat exclusif suffit.</span> <span class="cor">Votre formation actuelle ne suffit pas : mandataire d'un courtier à titre principal, c'est le niveau I.</span><span class="nf">3</span> »</p><p>« <span class="err">Pas d'association à rejoindre non plus : les mandataires en sont dispensés.</span> <span class="cor">Il faudra adhérer à une association agréée : le mandataire d'un courtier n'en est pas dispensé.</span><span class="nf">4</span> »</p><p>« <span class="err">Et vous gardez votre mandat exclusif à côté, pour vos crédits immobiliers à la banque.</span> <span class="cor">Pour le crédit immobilier, il faudra choisir : on ne cumule pas deux catégories sur la même nature d'opération.</span><span class="nf">5</span> »</p><p>« <span class="err">Inutile d'expliquer tout cela aux clients : ils veulent un taux, pas un statut.</span> <span class="cor">Vous indiquerez à chaque client votre catégorie et votre numéro ORIAS : c'est une information obligatoire.</span><span class="nf">6</span> »</p></div>
+</div>
+<button class="btn" id="voir" onclick="document.body.classList.add('vu');this.style.display='none'">Afficher la correction</button>
+</div>
+
+<div class="liste">
+<h2><span class="num">2 ·</span>Les corrections, une par une</h2>
+<div class="carte">
+<table><thead><tr><th>N°</th><th>Point</th><th>Le raisonnement</th></tr></thead><tbody><tr><td><b>1</b></td><td>Le nombre de banques</td><td>Le statut ne se déduit jamais du nombre de partenaires. Mandatée par la tête de réseau, qui est un IOBSP, Sarah serait <b>MANDATAIRE D'INTERMÉDIAIRE</b> (MIOBSP), pas courtière (art. R. 519-4 CMF).</td></tr><tr><td><b>2</b></td><td>La clientèle</td><td>Le mandataire d'intermédiaire travaille sur la clientèle de son mandant. Sauf clause contraire, <b>à la sortie du réseau, il ne l'emporte pas</b> : c'est le point à lire avant de signer.</td></tr><tr><td><b>3</b></td><td>La capacité</td><td>Le niveau dépend de la catégorie et du mandant. Le mandataire d'un courtier qui n'exerce pas à titre complémentaire relève du <b>NIVEAU I</b> (art. R. 519-8), plus exigeant que le niveau II du mandataire exclusif.</td></tr><tr><td><b>4</b></td><td>L'association agréée</td><td>La dispense vise les mandataires exclusifs et non exclusifs <b>d'établissements</b>, et leurs mandataires. Le mandataire d'un courtier, lui, doit adhérer (art. L. 519-11 CMF) : la dispense ne se déduit pas du mot « mandataire ».</td></tr><tr><td><b>5</b></td><td>Le cumul</td><td>Le cumul de catégories est interdit pour une <b>MÊME NATURE</b> d'opération (art. R. 519-4 II). Crédit immobilier d'un côté et de l'autre : impossible. Et le mandat exclusif peut, en plus, contenir une clause de non-concurrence.</td></tr><tr><td><b>6</b></td><td>L'information du client</td><td>La catégorie d'intermédiaire et le numéro d'immatriculation font partie des informations à communiquer au client avant toute opération. Ce n'est <b>pas un choix commercial</b>.</td></tr></tbody></table>
+</div>
+
+<h2><span class="num">3 ·</span>Ce qu'il faut en retenir</h2>
+<div class="carte"><div class="enc"><span class="t">CE QUE CE DISCOURS MONTRE</span>Chaque phrase mélangeait un argument commercial et une règle juridique. Le nombre de banques, la liberté, l'enseigne : rien de tout cela ne dit qui vous mandate.</div><div class="enc al"><span class="t">CE QUE RISQUE SARAH</span>Signer sur ces promesses, c'est découvrir plus tard qu'il lui manque la capacité requise, qu'elle doit adhérer à une association et qu'elle ne pourra pas emporter ses clients.</div><div class="enc ci"><span class="t">LA RÈGLE OPÉRATIONNELLE</span>Avant tout changement de statut, poser trois questions : qui me mandate ? quelles exigences pour cette catégorie ? à qui appartient la clientèle ? Puis relire son mandat actuel.</div></div>
+</div>
+
+<footer>TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+</div>
+</body></html>
